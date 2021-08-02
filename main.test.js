@@ -1,15 +1,25 @@
-import main, { pipe, equals } from './main.js'
+import main, { equals, pipe } from "./main.js";
 
 Deno.test("first test", () => {
-  const plantNames = [ "Sapin blanc", "Sapin de Vancouver", "Abutilon d'Avicenne", "Mimosa argenté" ]
+  const plantNames = [
+    "Sapin blanc",
+    "Sapin de Vancouver",
+    "Abutilon d'Avicenne",
+    "Mimosa argenté",
+  ];
 
-  const actual = main(plantNames)
-  const expected = [ "Abutilon d'Avicenne", "Mimosa argenté", "Sapin blanc", "Sapin de Vancouver" ]
+  const actual = main(plantNames);
+  const expected = [
+    "Abutilon d'Avicenne",
+    "Mimosa argenté",
+    "Sapin blanc",
+    "Sapin de Vancouver",
+  ];
 
   if (!equals(actual, expected)) {
-    console.log('actual', actual)
-    console.log('expected', expected)
+    console.log("actual", actual);
+    console.log("expected", expected);
 
-    throw new Error()
+    throw new Error();
   }
-})
+});
