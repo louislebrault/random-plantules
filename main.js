@@ -1,7 +1,5 @@
 import plantNames from "./plantNames.js";
 
-// un serveur http qui redirect vers la page wikipedia d'une des plantes de la liste ?
-
 export const pipe = (...args) => {
   const fns = args.slice(0, args.length - 1);
   const input = args[args.length - 1];
@@ -11,6 +9,18 @@ export const pipe = (...args) => {
     input,
   );
 };
+
+export const pipeAsync = (...fns) => input => pipeAsyncRec(fns, input)
+
+const pipeAsyncRec = async ([fn, ...restFns], input) => {
+  const value = await fn(input)
+
+  if (!restFns.length) {
+    return value
+  }
+
+  return pipeAsyncRec(restFns, value)
+}
 
 const map = cb => a => a.map(cb)
 
@@ -72,12 +82,13 @@ export const writeCleanPlantNamesFile = (input) =>
     input,
   );
 
-export const getRandomPlantName = async () => {
-  const names = await Deno.readTextFile('./clean-plantNames.txt')
+const getNames = () => Deno.readTextFile('./clean-plantNames.txt')
+const splitNames = names => names.split(';')
+const takeRandomItem = a => a[Math.floor(Math.random() * a.length)]
 
-  const list = names.split(';')
-
-  const randomIndex = Math.floor(Math.random() * list.length)
-
-  return list[randomIndex]
-}
+export const getRandomPlantName = pipeAsync(
+  getNames,
+  splitNames,
+  takeRandomItem
+)
+console.log('await getRandomPlantName', await getRandomPlantName())

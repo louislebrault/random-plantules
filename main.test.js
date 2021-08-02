@@ -1,25 +1,15 @@
-import main, { equals, pipe } from "./main.js";
+import { equals, pipe, pipeAsync } from "./main.js";
 
-Deno.test("first test", () => {
-  const plantNames = [
-    "Sapin blanc",
-    "Sapin de Vancouver",
-    "Abutilon d'Avicenne",
-    "Mimosa argenté",
-  ];
+Deno.test('pipeAsync : pipe functions passed as parameter', async () => {
+  const fn1 = a => a - 5
+  const fn2 = a => a * 2
 
-  const actual = main(plantNames);
-  const expected = [
-    "Abutilon d'Avicenne",
-    "Mimosa argenté",
-    "Sapin blanc",
-    "Sapin de Vancouver",
-  ];
+  const actual = await pipeAsync(fn1, fn2)(20)
+  const expected = 30
 
-  if (!equals(actual, expected)) {
-    console.log("actual", actual);
-    console.log("expected", expected);
-
+  if (actual !== expected) {
+    console.log('actual', actual)
+    console.log('expected', expected)
     throw new Error();
   }
-});
+})
