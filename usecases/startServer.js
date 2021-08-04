@@ -1,4 +1,4 @@
-import { start } from '../effects/http.js'
+import { start } from '../effects/http.ts'
 
 const startServer = start
 

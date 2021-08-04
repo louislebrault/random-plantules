@@ -7,7 +7,10 @@ export const pipe:pipe = (...fns) => input => {
 };
 
 type pipeAsync = (...fns: Array<unknown>) => (input: unknown) => unknown
-export const pipeAsync:pipeAsync = (...fns) => input => pipeAsyncRec(fns, input)
+export const pipeAsync:pipeAsync =
+  (...fns) =>
+  input =>
+  pipeAsyncRec(fns, input)
 
 type pipeAsyncRec = (fns: Array<unknown>, input: unknown) => unknown
 const pipeAsyncRec:pipeAsyncRec = async ([fn, ...restFns], input) => {
