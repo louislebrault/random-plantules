@@ -1,4 +1,4 @@
-import { uniq, keepTruthies, sortAlphab, pipeAsync } from '../helpers/utils.js'
+import { uniq, keepTruthies, sortAlphab, pipeAsync } from '../helpers/utils.ts'
 import { writePlantNamesFile } from '../effects/plants.js'
 import plantNames from '../data/raw-plant-names.js'
 
