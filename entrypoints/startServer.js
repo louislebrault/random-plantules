@@ -1,3 +1,3 @@
-import startServer from '../usecases/startServer.js'
+import startServer from '../usecases/startServer.ts'
 
 startServer()

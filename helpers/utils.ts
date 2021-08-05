@@ -73,3 +73,6 @@ export const assert:assert = (actual, expected) => {
 
 type uniq = (a: Array<unknown>) => Array<unknown>
 export const uniq:uniq = (a) => Array.from(new Set(a));
+
+type joinNames = (names: Array<string>) => string
+export const joinNames: joinNames = names => names.join(';')
