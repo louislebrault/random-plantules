@@ -6,7 +6,7 @@ export const pipe:pipe = (...fns) => input => {
   );
 };
 
-type pipeAsync = (...fns: Array<unknown>) => (input: unknown) => unknown
+type pipeAsync = (...fns: Array<unknown>) => (input: unknown) => any
 export const pipeAsync:pipeAsync =
   (...fns) =>
   input =>

@@ -1,9 +1,12 @@
 import { serve, ServerRequest } from "https://deno.land/std@0.103.0/http/server.ts";
-import redirectToRandomPlantPage from '../usecases/redirectToRandomPlantPage.js';
+import redirectToRandomPlantPage from '../usecases/redirectToRandomPlantPage.ts';
+import { dispatch, Msg } from '../helpers/dispatch.ts';
 
 // Beaucoup de page manquante alors qu'elle existe sur wikipedia, ptete en utilisant leur api search on
 // aurait moins de page manquante ?
 // //https://fr.wikipedia.org/wiki/Sp%C3%A9cial:ApiSandbox#action=query&format=json&list=search&utf8=1&srsearch=Calepine%20irreguliere
+
+// passer effects en dépendance dans les use cases, via les entrypoints
 
 type start = () => void
 export const start:start = async () => {
@@ -11,7 +14,7 @@ export const start:start = async () => {
   console.log(`HTTP webserver running.  Access it at:  http://localhost:1234/`);
 
   for await (const request of server) {
-    redirectToRandomPlantPage(request)
+    dispatch(Msg.redirectToRandomPlantPage, { request })
   }
 
   return server
